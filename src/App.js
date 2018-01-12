@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import ReactCardFlip from 'react-card-flip';
 import Login from './Login'
+import Logout from './Logout'
 
 // Code for logged-in users
 // import { getQueryParams } from './utils';
@@ -49,6 +50,9 @@ class App extends Component {
       <div>
         <div>
           <Login />
+        </div>
+        <div>
+          <Logout />
         </div>
         <div className="page-container">
           <Card front="안녕" back="hi"/>

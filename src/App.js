@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import ReactCardFlip from 'react-card-flip';
+import Login from './Login'
 
 // Code for logged-in users
 // import { getQueryParams } from './utils';
@@ -9,7 +9,6 @@ import ReactCardFlip from 'react-card-flip';
 // import Main from './Main';
 
 // test button for React TODO: consider deleting
-import Button from 'react-toolbox/lib/button/Button';
 
 //
 // class App extends Component {
@@ -47,8 +46,13 @@ import Button from 'react-toolbox/lib/button/Button';
 class App extends Component {
   render() {
     return (
-      <div className="page-container">
-        <Card front="안녕" back="hi"/>
+      <div>
+        <div>
+          <Login />
+        </div>
+        <div className="page-container">
+          <Card front="안녕" back="hi"/>
+        </div>
       </div>
     );
   }

@@ -1,45 +1,44 @@
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
+// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+// import AppBar from 'material-ui/AppBar';
+// import RaisedButton from 'material-ui/RaisedButton';
+// import TextField from 'material-ui/TextField';
+import React from 'react';
 
-class Login extends Component {
+class Login extends React.Component {
 constructor(props){
   super(props);
   this.state={
-  username:'',
-  password:''
+    login: '',
+    name: ''
   }
- }
+  this.handleSubmit = this.handleSubmit.bind(this);
+}
+
+handleSubmit(e) {
+  e.preventDefault();
+  console.log('i am in handle submit');
+
+  fetch("http://localhost:3001/login", {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify ({
+      'login': `${e.target[0].value}`,
+    })
+  })
+}
+
 render() {
     return (
-      <div>
-        <MuiThemeProvider>
-          <div>
-          <AppBar
-             title="Login"
-           />
-           <TextField
-             hintText="Enter your Username"
-             floatingLabelText="Username"
-             onChange = {(event,newValue) => this.setState({username:newValue})}
-             />
-           <br/>
-             <TextField
-               type="password"
-               hintText="Enter your Password"
-               floatingLabelText="Password"
-               onChange = {(event,newValue) => this.setState({password:newValue})}
-               />
-             <br/>
-             <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.handleClick(event)}/>
-         </div>
-         </MuiThemeProvider>
-      </div>
+      <form name="login" className="form" onSubmit={this.handleSubmit}>
+        <label >Login</label>
+        <input type="text"/>
+        <input type="submit"/>
+      </form>
     );
   }
 }
-const style = {
- margin: 15,
-};
+
 export default Login;

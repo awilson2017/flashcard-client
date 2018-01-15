@@ -4,6 +4,9 @@
   "private": true,
   "dependencies": {
     "axios": "^0.17.1",
+    "dotenv": "^4.0.0",
+    "immutable": "^3.8.2",
+    "lodash": "^4.17.4",
     "material-ui": "^0.20.0",
     "react": "^16.2.0",
     "react-card-flip": "^0.1.1",

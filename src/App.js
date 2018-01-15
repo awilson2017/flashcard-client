@@ -1,50 +1,17 @@
 import React, { Component } from 'react';
 import './App.css';
 import ReactCardFlip from 'react-card-flip';
+// import Immutable from 'immutable';
+// import _ from 'underscore';
+// import ReactDOM from 'react-dom';
+
+// Custom Components
 import Login from './Login'
 import Logout from './Logout'
-
-// Code for logged-in users
-// import { getQueryParams } from './utils';
-// import Login from './Login';
-// import Main from './Main';
-
-// test button for React TODO: consider deleting
-
-//
-// class App extends Component {
-//   constructor() {
-//     super();
-//
-//     // const params = getQueryParams()
-//     // this.state = { token: params.token }
-//   }
-//
-//   render() {
-//     return (
-//       // <div className="root">
-//       //   <Button raised primary>
-//       //     Hi!
-//       //   </Button>
-//
-//
-//
-//         <div className="page-container">
-//           <div className="card">
-//             <div className="word">
-//               안녕
-//             </div>
-//           </div>
-//         </div>
-//
-//
-//       // </div>
-//     );
-//   }
-// }
-
+import Translate from './Translate'
 
 class App extends Component {
+
   render() {
     return (
       <div>
@@ -54,6 +21,14 @@ class App extends Component {
         <div>
           <Logout />
         </div>
+
+        <br />
+
+        <div>
+
+          <Translate />
+        </div>
+
         <div className="page-container">
           <Card front="안녕" back="hi"/>
         </div>
@@ -61,6 +36,8 @@ class App extends Component {
     );
   }
 }
+
+
 
 class Card extends React.Component {
   constructor () {

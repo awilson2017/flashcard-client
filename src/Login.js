@@ -18,7 +18,7 @@ handleSubmit(e) {
   e.preventDefault();
   console.log('i am in handle submit');
 
-  fetch("http://localhost:3001/login", {
+  var login =fetch("http://localhost:3001/login", {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -28,6 +28,7 @@ handleSubmit(e) {
       'login': `${e.target[0].value}`,
     })
   })
+console.log(login);
 }
 
 render() {

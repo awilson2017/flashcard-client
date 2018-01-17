@@ -19,6 +19,9 @@ class Logout extends React.Component {
         'Content-Type': 'application/json'
       },
     })
+    .then(result => {
+      console.log(result.json());
+    })
   }
   render(){
     return (

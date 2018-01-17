@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import dotenv from 'dotenv';
-require('dotenv').config();
-// require('dotenv').config();
 
-const googleKey = process.env.GOOGLE_KEY;
+const googleKey = process.env.REACT_APP_GOOGLE_KEY;
 
+console.log(googleKey);
 class Translate extends Component {
   state = {
     query: '',
@@ -20,13 +18,13 @@ class Translate extends Component {
 
     // console.log(process.env);
 
-     axios.post(`https://translation.googleapis.com/language/translate/v2/?key=${GOOGLE_KEY}&q=${this.state.query}&source=en&target=ko&format=text`)
+     axios.post(`https://translation.googleapis.com/language/translate/v2/?key=${googleKey}&q=${this.state.query}&source=en&target=ko&format=text`)
       .then(({data}) =>{
         console.log('data.data');
         console.log(data.data);
         console.log('data.data.translations');
         console.log(data.data['translations']);
-      console.log('[0]');
+        console.log('[0]');
         console.log(data.data['translations'][0]['translatedText']);
 
         this.setState({

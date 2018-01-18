@@ -3,11 +3,9 @@ import axios from 'axios';
 
 const googleKey = process.env.REACT_APP_GOOGLE_KEY;
 
-console.log(googleKey);
 class Translate extends Component {
   state = {
     query: '',
-    codedQuery: '',
     translatedWord: '',
   }
 

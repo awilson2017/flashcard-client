@@ -90,7 +90,6 @@ class CardContainer extends React.Component {
     const cards = [];
     apiFormatedCards.forEach((card) => {
       console.log('card');
-      // console.log(card);
       var cardObject = {
         word: card.question,
         description: card.answer,
@@ -100,32 +99,20 @@ class CardContainer extends React.Component {
       cards.push(cardObject)
       console.log(cards);
     })
-    //     let stuff2 =stuff.map(function(obj) {
-    //       var rObj = {};
-    // rObj[word] =obj.question
-    // rObj[description] =obj.answer
-    // rObj[image] =obj.image_file_name
-    // return
-    //     })
-    // console.log(stuff2);
-    console.log(this.props.userCards);
-    // const cards = this.props.userCards;
-    console.log("this is generateCards cards");
-    console.log(cards);
-     const cardsList = cards.map((card) => {
-       console.log('card');
-       console.log(card);
-        return (
-          <Card
-            frontContent={card.word}
-            backContent={card.description}
-            showNextCard={this.boundShowNextCard}
-            showPrevCard = {this.boundShowPrevCard}
-            cardNumber={this.state.cardNumber}
-          />
-          );
-      })
-     return(cardsList[this.state.cardNumber]);
+    const cardsList = cards.map((card) => {
+      console.log('card');
+      console.log(card);
+      return (
+        <Card
+          frontContent={card.word}
+          backContent={card.description}
+          showNextCard={this.boundShowNextCard}
+          showPrevCard = {this.boundShowPrevCard}
+          cardNumber={this.state.cardNumber}
+        />
+      );
+    })
+    return(cardsList[this.state.cardNumber]);
   }
   render() {
     return (

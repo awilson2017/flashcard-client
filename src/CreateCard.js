@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
+const googleKey = process.env.REACT_APP_GOOGLE_KEY;
+
 
 class CreateCard extends Component {
   constructor() {
@@ -6,7 +10,9 @@ class CreateCard extends Component {
     this.state = {
       word: '',
       description: '',
-      image: ''
+      image: '',
+      word: '',
+      translatedWord: '',
       // showError: false
     }
   }
@@ -14,6 +20,27 @@ class CreateCard extends Component {
   // hideError() {
   //   this.setState({showError: !this.state.showError});
   // }
+  getTranslation = () => {
+     axios.post(`https://translation.googleapis.com/language/translate/v2/?key=${googleKey}&q=${this.state.word}&source=en&target=ko&format=text`)
+      .then(({data}) => {
+        console.log(data.data['translations'][0]['translatedText']);
+        this.setState({
+          translatedWord: data.data['translations'][0]['translatedText'],
+        })
+      })
+  }
+
+  handleClick = () => {
+    console.log("inside handleClick");
+    this.getTranslation()
+  }
+
+  handleOnChange = () => {
+    console.log(this);
+    this.setState({
+      word: this.search.value,
+    }
+  )}
 
   render() {
     const errorMessage = this.state.showError ? 'Please fill in the word and description!' : '';
@@ -32,10 +59,22 @@ class CreateCard extends Component {
             <input
               id='word'
               placeholder="Word i.e. 'React'"
+              ref={input => this.search = input}
               value = {this.state.word}
-              onChange = {(e) => this.setState({word: e.target.value})}
+              onChange={this.handleOnChange}
+              // onChange = {(e) => this.setState({word: e.target.value})}
             />
+            <button
+              onClick={this.getInfo}
+              >
+                Translate
+            </button>
             {/* TODO add image upload */}
+
+            <p>
+              {this.state.word !== '' ? `${this.state.word} in Korean is ${this.state.translatedWord}` : ''}
+            </p>
+
             <input
               id='description'
               placeholder="Description i.e. 'A front end js framework.'"

@@ -45,14 +45,14 @@ html, body {
   font-weight: 300;
 }
 
-@keyframes flipBack {
+/* @keyframes flipBack {
   0% {
     transform: rotateY(180deg);
   }
   100% {
     transform: rotateY(0deg);
   }
-}
+} */
 
 * {
   position: relative;
@@ -261,12 +261,12 @@ html, body {
 }
 
 .card-container__icon {
-  position: fixed;
+  /* position: fixed; */
   z-index: 100;
   font-size: 1.5em;
-  top: 0.5em;
+  /* top: 0.5em;
   left: 94%;
-  transform: translateX(-50%);
+  transform: translateX(-50%); */
   cursor: pointer;
   color: #333;
 }

@@ -46,27 +46,27 @@ class CardContainer extends React.Component {
     console.log(this.props);
     console.log(this.props.userCards);
     const url = `http://localhost:3001/users/${this.props.user_id}/flashcards/`;
-    console.log(url);
-    console.log(`Sending GET request to ${url}`);
+    // console.log(url);
+    // console.log(`Sending GET request to ${url}`);
     axios.get(url)
       .then(({data}) => {
         data.forEach((card) => {
-          console.log('card');
+          // console.log('card');
           // console.log(card);
           var cardObject = {
             word: card.question,
             description: card.answer,
             image: card.image_file_name,
           }
-          console.log(cardObject);
+          // console.log(cardObject);
 
           this.setState({
             cards: this.state.cards.concat(cardObject),
           })
-          console.log('after push cards');
-          console.log(this.state.cards);
+          // console.log('after push cards');
+          // console.log(this.state.cards);
         })
-        console.log(data);
+        // console.log(data);
       })
   }
 
@@ -89,16 +89,16 @@ class CardContainer extends React.Component {
     const apiFormatedCards = this.props.userCards;
     const cards = [];
     apiFormatedCards.forEach((card) => {
-      console.log('card');
+      // console.log('card');
       // console.log(card);
       var cardObject = {
         word: card.question,
         description: card.answer,
         image: card.image_file_name,
       }
-      console.log(cardObject);
+      // console.log(cardObject);
       cards.push(cardObject)
-      console.log(cards);
+      // console.log(cards);
     })
     //     let stuff2 =stuff.map(function(obj) {
     //       var rObj = {};
@@ -108,13 +108,13 @@ class CardContainer extends React.Component {
     // return
     //     })
     // console.log(stuff2);
-    console.log(this.props.userCards);
+    // console.log(this.props.userCards);
     // const cards = this.props.userCards;
-    console.log("this is generateCards cards");
-    console.log(cards);
+    // console.log("this is generateCards cards");
+    // console.log(cards);
      const cardsList = cards.map((card) => {
-       console.log('card');
-       console.log(card);
+       // console.log('card');
+       // console.log(card);
         return (
           <Card
             frontContent={card.word}
@@ -135,7 +135,7 @@ class CardContainer extends React.Component {
             onClick={() => {
               this.setState({showModal: !this.state.showModal});
             }}
-          />
+          >add card</span>
         {this.state.showModal
           ? <CreateCard
               onShadowClick={this.boundCallback}

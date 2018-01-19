@@ -57,12 +57,12 @@ class Main extends React.Component {
           user_id: user_id,
           cards: data,
         }, () => {
-          console.log(this.state.user_id)
-          console.log(this.state.cards);
+          // console.log(this.state.user_id)
+          // console.log(this.state.cards);
         })
       })
 
-    console.log(this.state.cards);
+    // console.log(this.state.cards);
   }
   render() {
     if (this.state.user_id) {

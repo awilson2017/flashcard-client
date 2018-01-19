@@ -10,12 +10,6 @@ class Translate extends Component {
   }
 
   getInfo = () => {
-    // console.log('this.state.query');
-    // console.log(this.state.query);
-    // console.log('axios.post');
-
-    // console.log(process.env);
-
      axios.post(`https://translation.googleapis.com/language/translate/v2/?key=${googleKey}&q=${this.state.query}&source=en&target=ko&format=text`)
       .then(({data}) =>{
         console.log('data.data');

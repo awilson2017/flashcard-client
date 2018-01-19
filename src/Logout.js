@@ -29,12 +29,5 @@ class Logout extends React.Component {
     );
   }
 }
-// class Logout extends React.Component {
-//   constructor () {
-//     super();
-//     this.state =
-//   }
-//
-// }
 
 export default Logout;

@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 const googleKey = process.env.REACT_APP_GOOGLE_KEY;
+const forvoKey= process.env.REACT_APP_FORVO_KEY;
+
+console.log(googleKey);
+console.log(forvoKey);
 
 
 class CreateCard extends Component {
@@ -26,13 +30,28 @@ class CreateCard extends Component {
         console.log(data.data['translations'][0]['translatedText']);
         this.setState({
           translatedWord: data.data['translations'][0]['translatedText'],
+        }, () => {
+          axios.get(`http://localhost:3001/forvo?translated=${this.state.translatedWord}`)
+            .then(({data}) => {
+              console.log('data');
+              console.log(data);
+            })
+            
         })
       })
+
+  }
+
+
+
+  getAudio = () => {
+    axios.get(`https://apifree.forvo.com/action/word-pronunciations/format/json/word/${this.state.translatedWord}/key/${forvoKey}`)
   }
 
   handleClick = () => {
     console.log("inside handleClick");
     this.getTranslation()
+
   }
 
   handleOnChange = () => {
@@ -65,14 +84,14 @@ class CreateCard extends Component {
               // onChange = {(e) => this.setState({word: e.target.value})}
             />
             <button
-              onClick={this.getInfo}
+              onClick={this.getTranslation}
               >
                 Translate
             </button>
             {/* TODO add image upload */}
 
             <p>
-              {this.state.word !== '' ? `${this.state.word} in Korean is ${this.state.translatedWord}` : ''}
+              {this.state.translatedWord !== '' ? `${this.state.word} in Korean is ${this.state.translatedWord}` : ''}
             </p>
 
             <input

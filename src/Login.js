@@ -3,7 +3,7 @@
 // import RaisedButton from 'material-ui/RaisedButton';
 // import TextField from 'material-ui/TextField';
 import React from 'react';
-import Modal from 'react-modal';
+// import Modal from 'react-modal';
 import axios from 'axios';
 
 class Login extends React.Component {

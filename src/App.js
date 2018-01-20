@@ -12,10 +12,9 @@ import axios from 'axios';
 // Custom Components
 import Login from './Login'
 import Logout from './Logout'
-import Translate from './Translate'
 import CardContainer from './CardContainer'
 
-class Header extends React.Component {
+class Header extends Component {
   constructor() {
     super();
     this.state = {
@@ -40,7 +39,7 @@ class Header extends React.Component {
   }
 }
 
-class Main extends React.Component {
+class Main extends Component {
   constructor(props){
     super(props);
     this.state={

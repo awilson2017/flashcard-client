@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FileUpload from './FileUpload'
 import axios from 'axios';
 
 const googleKey = process.env.REACT_APP_GOOGLE_KEY;
@@ -14,11 +15,13 @@ class CreateCard extends Component {
     this.state = {
       word: '',
       description: '',
-      image: '',
+      image: null,
       word: '',
       translatedWord: '',
+      audioFiles: [],
       // showError: false
     }
+
   }
 
   // hideError() {
@@ -27,37 +30,32 @@ class CreateCard extends Component {
   getTranslation = () => {
      axios.post(`https://translation.googleapis.com/language/translate/v2/?key=${googleKey}&q=${this.state.word}&source=en&target=ko&format=text`)
       .then(({data}) => {
-        console.log(data.data['translations'][0]['translatedText']);
         this.setState({
           translatedWord: data.data['translations'][0]['translatedText'],
         }, () => {
           axios.get(`http://localhost:3001/forvo?translated=${this.state.translatedWord}`)
             .then(({data}) => {
-              console.log('data');
-              console.log(data);
+              this.setState({
+                audioFiles: data
+              })
+              console.log(this.state.audioFiles);
             })
-            
         })
       })
 
   }
 
+  // handleClick = () => {
+  //   console.log("inside handleClick");
+  //   this.getTranslation()
+  //
+  // }
 
-
-  getAudio = () => {
-    axios.get(`https://apifree.forvo.com/action/word-pronunciations/format/json/word/${this.state.translatedWord}/key/${forvoKey}`)
-  }
-
-  handleClick = () => {
-    console.log("inside handleClick");
-    this.getTranslation()
-
-  }
-
-  handleOnChange = () => {
+  handleOnChange = (e) => {
     console.log(this);
     this.setState({
       word: this.search.value,
+      // image: e.target.files[0],
     }
   )}
 
@@ -90,17 +88,42 @@ class CreateCard extends Component {
             </button>
             {/* TODO add image upload */}
 
-            <p>
-              {this.state.translatedWord !== '' ? `${this.state.word} in Korean is ${this.state.translatedWord}` : ''}
-            </p>
+            <div>
+              {this.state.translatedWord !== '' && <div>
+                {this.state.word} in Korean is {this.state.translatedWord}
 
-            <input
+                <ul>
+                 <li>
+                   {console.log(this.state.audioFiles)}
+                   {this.state.audioFiles.forEach((file) => {
+                     file.country
+                   })}
+                 </li>
+               </ul>
+             </div>}
+           </div>
+
+
+
+            {/* <input
               id='description'
               placeholder="Description i.e. 'A front end js framework.'"
               value = {this.state.description}
               onChange = {(e) => this.setState({description: e.target.value})}
+            /> */}
+
+            <h1>Picture Upload</h1>
+            <input
+              id='description'
+              type="file"
+              multiple
+              value = {this.state.description}
+              onChange={(e) => this.setState({description: e.target.value})}
             />
+
+
             <br/>
+
             <button
               id='create-card__button'
               onClick={() => {

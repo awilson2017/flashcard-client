@@ -1,5 +1,5 @@
 import React from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import Card from './Card';
 import CreateCard from './CreateCard';
 
@@ -76,6 +76,12 @@ class CardContainer extends React.Component {
           <Card
             frontContent={card.word}
             backContent={card.description}
+            // backContent={
+            //    axios.get(`http://localhost:3001/forvo?translated=${card.word}`)
+            //     .then(({data}) => {
+            //       console.log(data);
+            //     })
+            // }
             showNextCard={this.boundShowNextCard}
             showPrevCard = {this.boundShowPrevCard}
             cardNumber={this.state.cardNumber}
@@ -97,7 +103,7 @@ class CardContainer extends React.Component {
           ? <CreateCard
               onShadowClick={this.boundCallback}
               onCreateCard={this.boundCreateCard}
-
+              user_id={this.props.user_id}
             />
           : ''}
         {this.generateCards()}

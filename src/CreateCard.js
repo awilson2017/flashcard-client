@@ -74,6 +74,7 @@ class CreateCard extends Component {
 
   render() {
     const errorMessage = this.state.showError ? 'Please fill in the word and description!' : '';
+    console.log(this.props.user_id);
   return (
     <div className='create-card'>
       <div
@@ -159,6 +160,10 @@ class CreateCard extends Component {
                   };
                   this.props.onCreateCard(word);
                   console.log(this.props.onCreateCard(word));
+                  axios.post(`http://localhost:3001/flashcards?user_id=${this.props.user_id}&question=${this.state.translatedWord}`)
+                    .then(({data}) => {
+                      console.log(data);
+                    })
                 }
               }}
               >

@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
-import FileUpload from './FileUpload'
+// import FileUpload from './FileUpload'
 import axios from 'axios';
+import AudioFiles from './AudioFiles'
+
 
 const googleKey = process.env.REACT_APP_GOOGLE_KEY;
-const forvoKey= process.env.REACT_APP_FORVO_KEY;
 
 console.log(googleKey);
-console.log(forvoKey);
 
 
 class CreateCard extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       word: '',
       description: '',
       image: null,
-      word: '',
       translatedWord: '',
-      audioFiles: [],
+      audioFiles: null,
+      audioFile: '',
       // showError: false
     }
 
@@ -28,20 +28,26 @@ class CreateCard extends Component {
   //   this.setState({showError: !this.state.showError});
   // }
   getTranslation = () => {
-     axios.post(`https://translation.googleapis.com/language/translate/v2/?key=${googleKey}&q=${this.state.word}&source=en&target=ko&format=text`)
-      .then(({data}) => {
-        this.setState({
-          translatedWord: data.data['translations'][0]['translatedText'],
-        }, () => {
-          axios.get(`http://localhost:3001/forvo?translated=${this.state.translatedWord}`)
-            .then(({data}) => {
-              this.setState({
-                audioFiles: data
-              })
-              console.log(this.state.audioFiles);
-            })
+    axios.get(`http://localhost:3001/google?query=${this.state.word}`)
+    .then(({data}) => {
+      this.setState({
+        translatedWord: data
+      }, () => {
+        axios.get(`http://localhost:3001/forvo?translated=${this.state.translatedWord}`)
+        .then(({data}) => {
+          console.log('data');
+          console.log(data);
+          this.setState({
+            audioFiles: data,
+          })
+          console.log(this.state.audioFiles);
+
+          console.log('translated');
+          console.log(this.state.translatedWord);
+
         })
       })
+    })
 
   }
 
@@ -59,15 +65,22 @@ class CreateCard extends Component {
     }
   )}
 
+  onSelection() {
+    this.setState({
+      audioFile: this.state
+    })
+
+  }
+
   render() {
     const errorMessage = this.state.showError ? 'Please fill in the word and description!' : '';
-    return (
-      <div className='create-card'>
-        <div
-          className='create-card__shadow'
-          onClick={() => {
-            this.props.onShadowClick();
-          }}
+  return (
+    <div className='create-card'>
+      <div
+        className='create-card__shadow'
+        onClick={() => {
+          this.props.onShadowClick();
+        }}
         >
         </div>
         <div className='create-card__body'>
@@ -86,40 +99,42 @@ class CreateCard extends Component {
               >
                 Translate
             </button>
-            {/* TODO add image upload */}
+              {/* TODO add image upload */}
 
             <div>
-              {this.state.translatedWord !== '' && <div>
-                {this.state.word} in Korean is {this.state.translatedWord}
+              {this.state.translatedWord  !== '' ?
+              `${this.state.word} in Korean is ${this.state.translatedWord}` : ''}
 
-                <ul>
-                 <li>
-                   {console.log(this.state.audioFiles)}
-                   {this.state.audioFiles.forEach((file) => {
-                     file.country
-                   })}
-                 </li>
-               </ul>
-             </div>}
-           </div>
+              {console.log(this.state.audioFiles)}
+            </div>
 
+            {/* <audio controls>
+              <source src="horse.ogg" type="audio/ogg"></source>
+              <source src="horse.mp3" type="audio/mpeg"></source>
+              Your browser does not support the audio element.
+            </audio> */}
 
+            <audio controls>
+              <source src="https://apifree.forvo.com/audio/36352924373e213c1p343i3o2433212b2c3l2e2q333b2h2c351j2f34223c1b293h3g2b223521261j241g1m32262o1m2g3l2o1l1f1n21272j332l3n291f352n2l283m353g2i2b2q342a2i3h2q3m3e3e2d2k3e2g2b2q371t1t_382f28242b29273i222e1k371m3c3h2g3e2c2c263l211t1t.mp3" type="audio/mpeg"></source>
+            </audio>
 
-            {/* <input
+            <br />
+
+            <input
               id='description'
               placeholder="Description i.e. 'A front end js framework.'"
               value = {this.state.description}
               onChange = {(e) => this.setState({description: e.target.value})}
-            /> */}
+            />
 
-            <h1>Picture Upload</h1>
-            <input
+            {/* <h1>Picture Upload</h1>
+              <input
               id='description'
               type="file"
               multiple
               value = {this.state.description}
               onChange={(e) => this.setState({description: e.target.value})}
-            />
+            /> */}
 
 
             <br/>
@@ -136,23 +151,23 @@ class CreateCard extends Component {
                 } else {
                   this.props.onShadowClick();
                   const word = {
-                    word: this.state.word,
+                    word: this.state.translatedWord,
                     description: this.state.description
                   };
                   this.props.onCreateCard(word);
                 }
               }}
-            >
+              >
                 Create!
-            </button>
-            <div className='create-card__error'>
-              {errorMessage}
+              </button>
+              <div className='create-card__error'>
+                {errorMessage}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    );
-  }
-}
+        );
+      }
+    }
 
-export default CreateCard;
+    export default CreateCard;

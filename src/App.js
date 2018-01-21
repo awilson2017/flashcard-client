@@ -52,9 +52,23 @@ class Main extends Component {
   onLoginComplete(user_id) {
     axios.get(`http://localhost:3001/users/${user_id}/flashcards/`)
       .then(({data}) => {
+        const cards = [];
+
+        data.forEach((card) => {
+          // console.log('card');
+          // console.log(card);
+          var cardObject = {
+            word: card.question,
+            description: card.answer,
+            image: card.image_file_name,
+          }
+          // console.log(cardObject);
+          cards.push(cardObject)
+          console.log(cards);
+        })
         this.setState({
           user_id: user_id,
-          cards: data,
+          cards: cards,
         }, () => {
           // console.log(this.state.user_id)
           // console.log(this.state.cards);

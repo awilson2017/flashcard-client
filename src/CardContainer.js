@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import Card from './Card';
 import CreateCard from './CreateCard';
 
@@ -8,7 +8,7 @@ class CardContainer extends React.Component {
     super(props);
     this.state = {
       // console.log(this.props.userCards);
-      cards: [],
+      cards: props.userCards,
       cardNumber: 0
     };
     this.boundCallback = this.hideCreateCard.bind(this);
@@ -53,35 +53,24 @@ class CardContainer extends React.Component {
   // }
 
   generateCards() {
-    const apiFormatedCards = this.props.userCards;
-    const cards = [];
-    apiFormatedCards.forEach((card) => {
-      // console.log('card');
-      // console.log(card);
-      var cardObject = {
-        word: card.question,
-        description: card.answer,
-        image: card.image_file_name,
-      }
-      // console.log(cardObject);
-      cards.push(cardObject)
-      // console.log(cards);
-    })
-    //     let stuff2 =stuff.map(function(obj) {
-    //       var rObj = {};
-    // rObj[word] =obj.question
-    // rObj[description] =obj.answer
-    // rObj[image] =obj.image_file_name
-    // return
-    //     })
-    // console.log(stuff2);
-    // console.log(this.props.userCards);
-    // const cards = this.props.userCards;
-    // console.log("this is generateCards cards");
-    // console.log(cards);
+    // const apiFormatedCards = this.props.userCards;
+    // apiFormatedCards.forEach((card) => {
+    //   // console.log('card');
+    //   // console.log(card);
+    //   var cardObject = {
+    //     word: card.question,
+    //     description: card.answer,
+    //     image: card.image_file_name,
+    //   }
+    //   // console.log(cardObject);
+    //   cards.push(cardObject)
+    //   // console.log(cards);
+    // })
+     const cards = this.state.cards;
+
      const cardsList = cards.map((card) => {
-       // console.log('card');
-       // console.log(card);
+       console.log('card');
+       console.log(cards);
         return (
           <Card
             frontContent={card.word}

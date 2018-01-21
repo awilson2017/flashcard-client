@@ -33,7 +33,7 @@ class CardContainer extends React.Component {
   }
 
   setCard(card) {
-    const newCards = this.state.cards.push(card);
+    const newCards = this.state.cards.concat(card);
     this.setState({cards: newCards});
   }
 
@@ -67,6 +67,7 @@ class CardContainer extends React.Component {
     //   // console.log(cards);
     // })
      const cards = this.state.cards;
+     console.log(this.state.cards);
 
      const cardsList = cards.map((card) => {
        console.log('card');

@@ -13,6 +13,7 @@ import axios from 'axios';
 import Login from './Login'
 import Logout from './Logout'
 import CardContainer from './CardContainer'
+import SignUp from './SignUp'
 
 class Header extends Component {
   constructor() {
@@ -77,6 +78,13 @@ class Main extends Component {
 
     // console.log(this.state.cards);
   }
+
+  onSignUpComplete(user_id) {
+    this.setState({
+      user_id: user_id,
+    })
+  }
+
   render() {
     if (this.state.user_id) {
       return (
@@ -97,6 +105,7 @@ class Main extends Component {
         <div className='wrapper'>
           <Login onLoginComplete={this.onLoginComplete.bind(this)}
           user_id={this.state.user_id}/>
+          <SignUp onSignUpComplete={this.onSignUpComplete.bind(this)} />
           <h1>
             Welcome to Korean Flashard App
           </h1>

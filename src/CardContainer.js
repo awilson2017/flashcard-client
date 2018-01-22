@@ -109,7 +109,14 @@ class CardContainer extends React.Component {
               user_id={this.props.user_id}
             />
           : ''}
-        {this.generateCards()}
+
+          { (this.state.cards !== null) ?
+
+            this.generateCards()
+          :
+            "please add your first card"
+          }
+
 
         {/* <div className='card-container__dots-wrapper'>
           {this.generateDots()}

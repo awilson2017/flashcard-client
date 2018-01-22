@@ -72,6 +72,10 @@ class CreateCard extends Component {
 
   }
 
+capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
   render() {
     const errorMessage = this.state.showError ? 'Please fill in the word and description!' : '';
     console.log(this.props.user_id);
@@ -95,6 +99,7 @@ class CreateCard extends Component {
               onChange={this.handleOnChange}
               // onChange = {(e) => this.setState({word: e.target.value})}
             />
+
             <button
               onClick={this.getTranslation}
               >
@@ -103,26 +108,23 @@ class CreateCard extends Component {
               {/* TODO add image upload */}
 
             <br />
+            <br />
 
-            {/* <div>
+            <div>
               {this.state.translatedWord  !== '' ?
-              `${this.state.word} in Korean is ${this.state.translatedWord}` : ''}
+              `Korean Translation:  ${this.state.translatedWord}` : ''}
 
               {console.log(this.state.audioFileOnCreate)}
-            </div> */}
-
-            <br />
-            <input value={this.state.translatedWord} placeholder="Your word in Korean"/>
-
+            </div>
 
             <br />
 
             {
               this.state.audioFileOnCreate !== null &&
-
                 <audio controls="controls"  src={this.state.audioFileOnCreate.mp3} autoPlay/>
-
             }
+
+            <input value={this.state.translatedWord} placeholder="Your word in Korean" hidden/>
 
             <br />
 

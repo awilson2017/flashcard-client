@@ -32,25 +32,7 @@ handleSubmit(e) {
     console.log('this.props');
     console.log(this.props);
     this.props.onLoginComplete(data.session.id);
-
-    // axios.get(`http://localhost:3001/users/${this.props.user_id}/flashcards/`).then(({data}) => {
-    //
-    //   let cards = data
-    //   console.log(data);
-    //   this.props.onLoginComplete(this.state.user_id, data);
-    //   // this.setState({
-    //   //   cards: data,
-    //   // })
-    //   // console.log(this.state.user_id);
-    //   // console.log(this.state.cards);
-    // })
-    // .catch(error => {
-    //   console.log('error');
-    //   console.log(error);
-    // });
-    // console.log(this.state.user_id);
   })
-
 }
 
 render() {

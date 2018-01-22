@@ -12,9 +12,6 @@ constructor(props){
   this.state={
     login: '',
     // name: '',
-    user_id: null,
-    cards: null,
-
   }
   // console.log(this.openModal.bind(this));
   // this.openModal = this.openModal.bind(this)

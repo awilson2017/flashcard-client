@@ -1,16 +1,36 @@
 import React from 'react';
+import axios from 'axios';
 
 class Card extends React.Component {
 
   constructor() {
     super();
     this.state = {
-      showAnswer: false
+      showAnswer: false,
+      audio: null,
     }
+    this.getAudio = this.getAudio.bind(this);
+  }
+
+  onClick = () =>{
+    this.setState({
+      showAnswer: !this.state.showAnswer
+    }, this.getAudio());
+  }
+
+  getAudio = () => {
+    console.log("i am in getAudio");
+    axios.get(`http://localhost:3001/forvo?translated=${this.props.frontContent}`)
+      .then(({data}) => {
+        console.log(data);
+        this.setState({
+          audio: data.mp3
+        })
+      })
   }
 
   render() {
-    const content = this.state.showAnswer ? this.props.backContent : this.props.frontContent;
+    const content = this.state.showAnswer ? this.state.audio : this.props.frontContent;
     const iconClass = this.state.showAnswer ? 'reply' : 'share';
     const cardClass = this.state.showAnswer ? 'back' : '';
     const contentClass = this.state.showAnswer ? 'back' : 'front';
@@ -19,21 +39,31 @@ class Card extends React.Component {
     return (
       <div
         className={`card ${cardClass}`}
-        onClick={() => this.setState({showAnswer: !this.state.showAnswer})}
+        onClick={this.onClick}
+        // onClick={() => this.setState({
+        //   showAnswer: !this.state.showAnswer
+        // })}
       >
       <span className='card__counter'>{this.props.cardNumber + 1}</span>
         <div
           className='card__flip-card'
           onClick={ () => {
-            this.setState({showAnswer: !this.state.showAnswer});
+            this.setState({
+              showAnswer: !this.state.showAnswer
+            });
           }}
         >
 
           <span className={`fa fa-${iconClass}`}/>
         </div>
+
         <div className={`card__content--${contentClass}`}>
-          {content}
+          {this.state.showAnswer
+            ? (this.state.audio !== null && <audio controls="controls" src={this.state.audio} autoPlay/>)
+            : this.props.frontContent}
+          {/* {content} */}
         </div>
+
         <div className={`card__actions ${actionClass}`}>
           <div
             className='card__prev-button'
@@ -44,6 +74,7 @@ class Card extends React.Component {
           >
             Prev
           </div>
+
           <div
             className='card__next-button'
             onClick={() => {

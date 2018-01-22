@@ -98,7 +98,10 @@ class CardContainer extends React.Component {
             onClick={() => {
               this.setState({showModal: !this.state.showModal});
             }}
-          >add card</span>
+          >
+            add card
+          </span>
+
         {this.state.showModal
           ? <CreateCard
               onShadowClick={this.boundCallback}

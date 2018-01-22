@@ -14,11 +14,11 @@ class CreateCard extends Component {
     super(props);
     this.state = {
       word: '',
-      description: '',
-      image: null,
+      // description: '',
+      // image: null,
       translatedWord: '',
-      audioFiles: null,
-      audioFile: '',
+      audioFileOnCreate: null,
+      // audioFileOnCreate: '',
       // showError: false
     }
 
@@ -38,9 +38,9 @@ class CreateCard extends Component {
           console.log('data');
           console.log(data);
           this.setState({
-            audioFiles: data,
+            audioFileOnCreate: data,
           })
-          console.log(this.state.audioFiles);
+          console.log(this.state.audioFileOnCreate);
 
           console.log('translated');
           console.log(this.state.translatedWord);
@@ -67,7 +67,7 @@ class CreateCard extends Component {
 
   onSelection() {
     this.setState({
-      audioFile: this.state
+      audioFileOnCreate: this.state
     })
 
   }
@@ -89,7 +89,7 @@ class CreateCard extends Component {
           <div className='create-card__input-wrapper'>
             <input
               id='word'
-              placeholder="Word i.e. 'React'"
+              placeholder="English word i.e. 'cat'"
               ref={input => this.search = input}
               value = {this.state.word}
               onChange={this.handleOnChange}
@@ -102,23 +102,25 @@ class CreateCard extends Component {
             </button>
               {/* TODO add image upload */}
 
-            <div>
+            <br />
+
+            {/* <div>
               {this.state.translatedWord  !== '' ?
               `${this.state.word} in Korean is ${this.state.translatedWord}` : ''}
 
-              {console.log(this.state.audioFiles)}
-            </div>
+              {console.log(this.state.audioFileOnCreate)}
+            </div> */}
 
             <br />
-            <input value={this.state.translatedWord} />
+            <input value={this.state.translatedWord} placeholder="Your word in Korean"/>
 
 
             <br />
 
             {
-              this.state.audioFiles !== null &&
+              this.state.audioFileOnCreate !== null &&
 
-                <audio controls="controls" id="placeholder" src={this.state.audioFiles.mp3}/>
+                <audio controls="controls"  src={this.state.audioFileOnCreate.mp3} autoPlay/>
 
             }
 
@@ -147,7 +149,7 @@ class CreateCard extends Component {
               id='create-card__button'
               onClick={() => {
 
-                if (this.state.word.length === 0 || this.state.description.length === 0) {
+                if (this.state.word.length === 0) {
                   this.setState({
                     showError: !this.state.showError
                   });

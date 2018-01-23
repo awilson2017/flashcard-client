@@ -72,6 +72,7 @@ class CardContainer extends React.Component {
           className={`card-container__dot fa fa-circle ${dotClass}`}
           onClick={() => this.setState({
             cardNumber: num
+
           })}
         />
       )

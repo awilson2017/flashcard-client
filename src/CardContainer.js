@@ -1,13 +1,17 @@
 import React from 'react';
 import axios from 'axios';
+import ReactDOM from 'react-dom';
+// import _ from 'lodash';
+// Custom Components
 import Card from './Card';
 import CreateCard from './CreateCard';
+
+var _ = require('lodash');
 
 class CardContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // console.log(this.props.userCards);
       cards: props.userCards,
       cardNumber: 0
     };
@@ -37,20 +41,23 @@ class CardContainer extends React.Component {
     this.setState({cards: newCards});
   }
 
-  // generateDots() {
-  //   const times = this.state.cards.size;
-  //   let arr = [];
-  //   _.times(times).forEach((num) => {
-  //     const dotClass = num  === this.state.cardNumber ? 'active' : '';
-  //     arr.push(
-  //       <span
-  //         className={`card-container__dot fa fa-circle ${dotClass}`}
-  //         onClick={() => this.setState({cardNumber: num})}
-  //       />
-  //     )
-  //   });
-  //   return arr;
-  // }
+  generateDots() {
+    const times = this.state.cards.length;
+    let arr = [];
+    console.log(times);
+    _.times(times).forEach((num) => {
+      const dotClass = num  === this.state.cardNumber ? 'active' : '';
+      arr.push(
+        <span
+          className={`card-container__dot fa fa-circle ${dotClass}`}
+          onClick={() => this.setState({
+            cardNumber: num
+          })}
+        />
+      )
+    });
+    return arr;
+  }
 
   generateCards() {
     // const apiFormatedCards = this.props.userCards;
@@ -110,11 +117,17 @@ class CardContainer extends React.Component {
             />
           : ''}
 
-          { (this.state.cards !== null)
+          {(this.state.cards !== null)
           ?
-            this.generateCards()
+          <div>
+            {this.generateCards()}
+
+            <div className='card-container__dots-wrapper'>
+              {this.generateDots()}
+            </div>
+          </div>
           :
-            "please add your first card"
+            "Please add your first card"
           }
 
 

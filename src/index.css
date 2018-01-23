@@ -341,7 +341,7 @@ input::placeholder {
 
 }
 
-/* .card-container__dot {
+.card-container__dot {
   color: lightgray;
   cursor: pointer;
 
@@ -349,4 +349,4 @@ input::placeholder {
     color: dodgerblue;
     transition: 0.5s;
   }
-} */
+}

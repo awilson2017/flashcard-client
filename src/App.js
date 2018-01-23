@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-// import ReactCardFlip from 'react-card-flip';
 // import Immutable from 'immutable';
-// import _ from 'lodash/core';
-// import ReactDOM from 'react-dom';
 // import Modal from 'react-modal'
 import axios from 'axios';
 

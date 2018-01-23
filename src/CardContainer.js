@@ -37,8 +37,13 @@ class CardContainer extends React.Component {
   }
 
   setCard(card) {
-    const newCards = this.state.cards.concat(card);
-    this.setState({cards: newCards});
+    axios.get(`http://localhost:3001/users/${this.props.user_id}/flashcards/`)
+      .then(({data}) => {
+        console.log(data);
+        this.setState({cards: data})
+      })
+    // const newCards = this.state.cards.concat(card);
+    // this.setState({cards: newCards});
   }
 
   generateDots() {

@@ -58,9 +58,15 @@ html, body {
   position: relative;
 }
 
+/* Login and SignUp */
 input::placeholder {
   font-style: italic;
   font-family: arial, sans-serif;
+}
+
+.login__error {
+  color: tomato;
+  margin-top: 1em;
 }
 
 .wrapper {

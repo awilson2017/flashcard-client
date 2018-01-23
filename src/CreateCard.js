@@ -71,7 +71,6 @@ class CreateCard extends Component {
     this.setState({
       audioFileOnCreate: this.state
     })
-
   }
 
 
@@ -177,6 +176,7 @@ class CreateCard extends Component {
               <div className='create-card__error'>
                 {errorMessage}
               </div>
+              
               <input value={this.state.translatedWord} placeholder="Your word in Korean" hidden/>
 
             </div>

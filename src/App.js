@@ -64,7 +64,6 @@ class Main extends Component {
 
           var cardObject = {
             word: card.question,
-            // description: card.answer,
             image: card.image_url,
           }
           // console.log(cardObject);

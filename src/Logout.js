@@ -3,9 +3,7 @@ import React from 'react';
 class Logout extends React.Component {
   constructor(props) {
     super(props);
-    this.state={
-      'login': ''
-    }
+    
     this.handleClick = this.handleClick.bind(this);
   }
 

@@ -9,15 +9,8 @@ import axios from 'axios';
 class Login extends React.Component {
 constructor(props){
   super(props);
-  this.state={
-    login: '',
-    // name: '',
-  }
-  // console.log(this.openModal.bind(this));
-  // this.openModal = this.openModal.bind(this)
-  // console.log(this.openModal);
+
   this.handleSubmit = this.handleSubmit.bind(this);
-  console.log(this.state.cards);
 }
 
 

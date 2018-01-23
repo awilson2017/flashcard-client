@@ -18,6 +18,7 @@ class CreateCard extends Component {
       // image: null,
       translatedWord: '',
       audioFileOnCreate: null,
+      image: null,
       // audioFileOnCreate: '',
       // showError: false
     }
@@ -72,9 +73,9 @@ class CreateCard extends Component {
 
   }
 
-capitalizeFirstLetter = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
+
+
+
 
   render() {
     const errorMessage = this.state.showError ? 'Please fill in the word and description!' : '';
@@ -128,21 +129,23 @@ capitalizeFirstLetter = (string) => {
 
             <br />
 
-            <input
+            {/* <input
               id='description'
               placeholder="Description i.e. 'A front end js framework.'"
               value = {this.state.description}
               onChange = {(e) => this.setState({description: e.target.value})}
-            />
+            /> */}
 
-            {/* <h1>Picture Upload</h1>
+            <h1>Picture Upload</h1>
               <input
               id='description'
               type="file"
               multiple
-              value = {this.state.description}
-              onChange={(e) => this.setState({description: e.target.value})}
-            /> */}
+              // value = {this.state.image}
+              onChange={(e) => {this.setState({image: e.target.files[0]})
+              console.log(e.target.files[0]);}
+            }
+            />
 
 
             <br/>
@@ -163,8 +166,19 @@ capitalizeFirstLetter = (string) => {
                     description: this.state.description
                   };
                   this.props.onCreateCard(word);
+
                   console.log(this.props.onCreateCard(word));
-                  axios.post(`http://localhost:3001/flashcards?user_id=${this.props.user_id}&question=${this.state.translatedWord}`)
+                  const formData = new FormData();
+
+                  formData.append('image', this.state.image)
+                  axios.post(`http://localhost:3001/flashcards?user_id=${this.props.user_id}&question=${this.state.translatedWord}`, formData, {
+                    headers: {
+                      'Content-Type': 'multipart/form-data'
+                    }
+                    // body: {
+                    //   image: this.state.image
+                    // }
+                  })
                     .then(({data}) => {
                       console.log(data);
                     })

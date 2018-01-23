@@ -7,6 +7,7 @@ import Card from './Card';
 import CreateCard from './CreateCard';
 
 var _ = require('lodash');
+var FontAwesome = require('react-fontawesome');
 
 class CardContainer extends React.Component {
   constructor(props) {
@@ -27,23 +28,37 @@ class CardContainer extends React.Component {
   showNextCard() {
     if ((this.state.cardNumber + 1) !== this.props.userCards.size) {
       this.setState({cardNumber: this.state.cardNumber += 1});
+      // this.nullAudioState()
     }
   }
 
   showPrevCard() {
     if (this.state.cardNumber !== 0) {
       this.setState({cardNumber: this.state.cardNumber -= 1});
+      // this.nullAudioState();
     }
   }
 
+  nullAudioState() {
+    this.setState({
+      audio: null,
+    })
+
+  }
+
   setCard(card) {
-    axios.get(`http://localhost:3001/users/${this.props.user_id}/flashcards/`)
+    console.log(this.state.cards.length + 1);
+    debugger
+    axios.get(`http://localhost:3001/users/${this.props.user_id}/flashcards/${(this.state.cards.length + 1)}`)
       .then(({data}) => {
         console.log(data);
-        this.setState({cards: data})
+        var cardObject = {
+          question: card.question,
+          image: card.image_url,
+        }
+        const newCards = this.state.cards.concat(cardObject);
+        this.setState({cards: newCards});
       })
-    // const newCards = this.state.cards.concat(card);
-    // this.setState({cards: newCards});
   }
 
   generateDots() {
@@ -73,7 +88,7 @@ class CardContainer extends React.Component {
        console.log(cards);
         return (
           <Card
-            frontContent={card.word}
+            frontContent={card.question}
             backContent={card.image}
             showNextCard={this.boundShowNextCard}
             showPrevCard = {this.boundShowPrevCard}
@@ -87,12 +102,15 @@ class CardContainer extends React.Component {
     return (
       <div>
         <span
+            name='plus'
             className='card-container__icon  fa fa-plus'
             onClick={() => {
               this.setState({showModal: !this.state.showModal});
             }}
           >
-            add card
+            ＋
+            {/* f067 */}
+            {/* add card */}
           </span>
 
         {this.state.showModal

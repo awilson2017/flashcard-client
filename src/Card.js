@@ -12,20 +12,31 @@ class Card extends React.Component {
     this.getAudio = this.getAudio.bind(this);
   }
 
+  // onClick flips the card
   onClick = () =>{
+    console.log('onClick flipping card');
     this.setState({
       showAnswer: !this.state.showAnswer
     }, this.getAudio());
   }
 
+  // function is used in onClick
   getAudio = () => {
     console.log("i am in getAudio");
+    console.log(this.props.frontContent);
+    console.log('state.audio');
+    console.log(this.state.audio);
     axios.get(`http://localhost:3001/forvo?translated=${this.props.frontContent}`)
       .then(({data}) => {
         console.log(data);
-        this.setState({
-          audio: data.mp3
-        })
+        if (data === null ) {
+          <div>No Audio for thie card</div>
+        } else {
+          console.log(data);
+          this.setState({
+            audio: data.mp3
+          })
+        }
       })
   }
 

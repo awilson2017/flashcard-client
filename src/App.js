@@ -13,8 +13,8 @@ import CardContainer from './CardContainer'
 import SignUp from './SignUp'
 
 class Header extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       showModal: false
     }
@@ -43,6 +43,7 @@ class Main extends Component {
     this.state={
       user_id: null,
       cards: null,
+      login: '',
     }
     console.log(this.state.user_id);
     console.log(this.state.cards);
@@ -63,7 +64,7 @@ class Main extends Component {
           console.log(card);
 
           var cardObject = {
-            word: card.question,
+            question: card.question,
             image: card.image_url,
           }
           // console.log(cardObject);
@@ -73,6 +74,7 @@ class Main extends Component {
         this.setState({
           user_id: user_id,
           cards: cards,
+          // login: login,
         })
       })
   }
@@ -89,7 +91,7 @@ class Main extends Component {
       return (
         <div className='wrapper'>
           <Logout onLogoutComplete={this.onLogoutComplete.bind(this)}/>
-          <Header />
+          <Header user_id={this.state.user_id}/>
           <div className='content-wrapper'>
             <CardContainer
               user_id={this.state.user_id}

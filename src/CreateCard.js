@@ -4,25 +4,16 @@ import axios from 'axios';
 import AudioFiles from './AudioFiles'
 
 
-const googleKey = process.env.REACT_APP_GOOGLE_KEY;
-
-console.log(googleKey);
-
-
 class CreateCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       word: '',
-      // description: '',
-      // image: null,
       translatedWord: '',
       audioFileOnCreate: null,
       image: null,
-      // audioFileOnCreate: '',
       showError: false
     }
-
   }
 
   hideError() {
@@ -67,18 +58,8 @@ class CreateCard extends Component {
     }
   )}
 
-  onSelection() {
-    this.setState({
-      audioFileOnCreate: this.state
-    })
-  }
-
-
-
-
-
   render() {
-    const errorMessage = this.state.showError ? 'Please fill in the word and upload an image!' : '';
+    const errorMessage = this.state.showError ? 'Please press Translate and upload an image!' : '';
     console.log(this.props.user_id);
   return (
     <div className='create-card'>
@@ -121,8 +102,15 @@ class CreateCard extends Component {
             <br />
 
             {
-              this.state.audioFileOnCreate !== null &&
+
+              (this.state.audioFileOnCreate !== null) ?
                 <audio controls="controls"  src={this.state.audioFileOnCreate.mp3} autoPlay/>
+
+              :
+                <div>No audio for this word</div>
+              }
+              {/* // this.state.audioFileOnCreate !== null &&
+              //   <audio controls="controls"  src={this.state.audioFileOnCreate.mp3} autoPlay/> */}
             }
 
             <h2>Picture Upload</h2>
@@ -154,7 +142,6 @@ class CreateCard extends Component {
                     word: this.state.translatedWord,
                     image: this.state.image
                   };
-                  this.props.onCreateCard(word);
 
                   const formData = new FormData();
 
@@ -167,6 +154,7 @@ class CreateCard extends Component {
                   })
                     .then(({data}) => {
                       console.log(data);
+                      this.props.onCreateCard(word);
                     })
                 }
               }}
@@ -176,7 +164,7 @@ class CreateCard extends Component {
               <div className='create-card__error'>
                 {errorMessage}
               </div>
-              
+
               <input value={this.state.translatedWord} placeholder="Your word in Korean" hidden/>
 
             </div>

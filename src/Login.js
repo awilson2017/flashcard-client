@@ -38,12 +38,6 @@ handleSubmit(e) {
     } else {
       this.props.onLoginComplete(data.session.id);
     }
-    // console.log(data);
-    // // TODO: error handling
-    // console.log(data.session.id);
-    // console.log('this.props');
-    // console.log(this.props);
-    // this.props.onLoginComplete(data.session.id);
   })
   .catch((errors)=>{
     console.error(errors);
@@ -59,7 +53,7 @@ render() {
           <input type="text" placeholder="Login"/>
           <input type="submit"/>
         </form>
-        
+
         <div className="login__error">
           {loginErrorMsg}
         </div>

@@ -60,19 +60,6 @@ class CardContainer extends React.Component {
   }
 
   generateCards() {
-    // const apiFormatedCards = this.props.userCards;
-    // apiFormatedCards.forEach((card) => {
-    //   // console.log('card');
-    //   // console.log(card);
-    //   var cardObject = {
-    //     word: card.question,
-    //     description: card.answer,
-    //     image: card.image_file_name,
-    //   }
-    //   // console.log(cardObject);
-    //   cards.push(cardObject)
-    //   // console.log(cards);
-    // })
      const cards = this.state.cards;
      console.log(this.state.cards);
 
@@ -83,12 +70,6 @@ class CardContainer extends React.Component {
           <Card
             frontContent={card.word}
             backContent={card.image}
-            // backContent={
-            //    axios.get(`http://localhost:3001/forvo?translated=${card.word}`)
-            //     .then(({data}) => {
-            //       console.log(data);
-            //     })
-            // }
             showNextCard={this.boundShowNextCard}
             showPrevCard = {this.boundShowPrevCard}
             cardNumber={this.state.cardNumber}

@@ -126,17 +126,6 @@ class CreateCard extends Component {
                 <audio controls="controls"  src={this.state.audioFileOnCreate.mp3} autoPlay/>
             }
 
-
-
-
-
-            {/* <input
-              id='description'
-              placeholder="Description i.e. 'A front end js framework.'"
-              value = {this.state.description}
-              onChange = {(e) => this.setState({description: e.target.value})}
-            /> */}
-
             <h2>Picture Upload</h2>
               <input
               id='description'
@@ -164,21 +153,18 @@ class CreateCard extends Component {
                   this.props.onShadowClick();
                   const word = {
                     word: this.state.translatedWord,
-                    description: this.state.description
+                    image: this.state.image
                   };
                   this.props.onCreateCard(word);
 
-                  console.log(this.props.onCreateCard(word));
                   const formData = new FormData();
 
                   formData.append('image', this.state.image)
+
                   axios.post(`http://localhost:3001/flashcards?user_id=${this.props.user_id}&question=${this.state.translatedWord}`, formData, {
                     headers: {
                       'Content-Type': 'multipart/form-data'
                     }
-                    // body: {
-                    //   image: this.state.image
-                    // }
                   })
                     .then(({data}) => {
                       console.log(data);

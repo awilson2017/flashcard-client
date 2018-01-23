@@ -30,7 +30,14 @@ class Card extends React.Component {
   }
 
   render() {
-    const content = this.state.showAnswer ? this.state.audio : this.props.frontContent;
+    const content = this.state.showAnswer
+    ? (this.state.audio !== null &&
+      <div>
+        <audio controls="controls" src={this.state.audio} autoPlay/>
+        <img src={this.props.backContent}/>
+      </div>)
+      : this.props.frontContent
+    // const content = this.state.showAnswer ? ( this.props.backContent) : this.props.frontContent;
     const iconClass = this.state.showAnswer ? 'reply' : 'share';
     const cardClass = this.state.showAnswer ? 'back' : '';
     const contentClass = this.state.showAnswer ? 'back' : 'front';
@@ -58,10 +65,10 @@ class Card extends React.Component {
         </div>
 
         <div className={`card__content--${contentClass}`}>
-          {this.state.showAnswer
+          {/* {this.state.showAnswer
             ? (this.state.audio !== null && <audio controls="controls" src={this.state.audio} autoPlay/>)
-            : this.props.frontContent}
-          {/* {content} */}
+            : this.props.frontContent} */}
+          {content}
         </div>
 
         <div className={`card__actions ${actionClass}`}>

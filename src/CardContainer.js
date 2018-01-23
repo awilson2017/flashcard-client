@@ -75,7 +75,7 @@ class CardContainer extends React.Component {
         return (
           <Card
             frontContent={card.word}
-            backContent={card.description}
+            backContent={card.image}
             // backContent={
             //    axios.get(`http://localhost:3001/forvo?translated=${card.word}`)
             //     .then(({data}) => {

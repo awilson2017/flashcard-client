@@ -62,12 +62,13 @@ class Main extends Component {
         const cards = [];
 
         data.forEach((card) => {
-          // console.log('card');
-          // console.log(card);
+          console.log('card');
+          console.log(card);
+
           var cardObject = {
             word: card.question,
-            description: card.answer,
-            image: card.image_file_name,
+            // description: card.answer,
+            image: card.image_url,
           }
           // console.log(cardObject);
           cards.push(cardObject)

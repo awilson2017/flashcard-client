@@ -50,6 +50,12 @@ class Main extends Component {
     console.log(this.state.user_id);
     console.log(this.state.cards);
   }
+  onSignUpComplete(user_id) {
+    this.setState({
+      user_id: user_id,
+    })
+  }
+
   onLoginComplete(user_id) {
     axios.get(`http://localhost:3001/users/${user_id}/flashcards/`)
       .then(({data}) => {
@@ -70,26 +76,22 @@ class Main extends Component {
         this.setState({
           user_id: user_id,
           cards: cards,
-        }, () => {
-          // console.log(this.state.user_id)
-          // console.log(this.state.cards);
         })
       })
-
-    // console.log(this.state.cards);
   }
 
-  onSignUpComplete(user_id) {
+  onLogoutComplete(user_id) {
     this.setState({
-      user_id: user_id,
+      user_id: null,
     })
   }
+
 
   render() {
     if (this.state.user_id) {
       return (
         <div className='wrapper'>
-          <Logout />
+          <Logout onLogoutComplete={this.onLogoutComplete.bind(this)}/>
           <Header />
           <div className='content-wrapper'>
             <CardContainer

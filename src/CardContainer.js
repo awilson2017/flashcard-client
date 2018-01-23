@@ -110,8 +110,8 @@ class CardContainer extends React.Component {
             />
           : ''}
 
-          { (this.state.cards !== null) ?
-
+          { (this.state.cards !== null)
+          ?
             this.generateCards()
           :
             "please add your first card"

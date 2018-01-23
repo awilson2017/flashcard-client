@@ -21,6 +21,7 @@ class Logout extends React.Component {
     })
     .then(result => {
       console.log(result.json());
+      this.props.onLogoutComplete(result)
     })
   }
   render(){

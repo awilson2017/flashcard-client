@@ -7,35 +7,40 @@ import axios from 'axios';
 
 
 // Custom Components
-import Login from './Login'
-import Logout from './Logout'
-import CardContainer from './CardContainer'
-import SignUp from './SignUp'
+import Login from './Login';
+import Logout from './Logout';
+import Header from './Header';
+import CardContainer from './CardContainer';
+import SignUp from './SignUp';
 
-class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showModal: false
-    }
-  }
-
-  render() {
-    return (
-      <div className='header'>
-        <div className='header-content header-content__left'>
-
-        </div>
-        <div className='header-content header-content__middle'>
-          Flash Cards
-        </div>
-        <div className='header-content header-content__right'>
-
-        </div>
-      </div>
-    )
-  }
-}
+// class Header extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       showModal: false
+//     }
+//   }
+//
+//   render() {
+//     return (
+//       <div className='header'>
+//         <div className='header-content header-content__left'>
+//           {/* <Logout
+//              user_id={this.props.user_id}
+//           onLogoutComplete={this.props.onLogoutComplete.bind(this)}
+//         /> */}
+//         </div>
+//
+//         <div className='header-content header-content__middle'>
+//           Flash Cards
+//         </div>
+//         <div className='header-content header-content__right'>
+//
+//         </div>
+//       </div>
+//     )
+//   }
+// }
 
 class Main extends Component {
   constructor(props){
@@ -91,7 +96,10 @@ class Main extends Component {
       return (
         <div className='wrapper'>
           <Logout onLogoutComplete={this.onLogoutComplete.bind(this)}/>
-          <Header user_id={this.state.user_id}/>
+          <Header
+          //    user_id={this.state.user_id}
+          // onLoginComplete={this.onLoginComplete.bind(this)}
+          />
           <div className='content-wrapper'>
             <CardContainer
               user_id={this.state.user_id}

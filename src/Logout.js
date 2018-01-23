@@ -3,7 +3,7 @@ import React from 'react';
 class Logout extends React.Component {
   constructor(props) {
     super(props);
-    
+
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -19,7 +19,8 @@ class Logout extends React.Component {
     })
     .then(result => {
       console.log(result.json());
-      this.props.onLogoutComplete(result)
+      console.log(this.props);
+      this.props.onLogoutComplete(result.session)
     })
   }
   render(){

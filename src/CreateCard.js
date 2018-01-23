@@ -20,14 +20,15 @@ class CreateCard extends Component {
       audioFileOnCreate: null,
       image: null,
       // audioFileOnCreate: '',
-      // showError: false
+      showError: false
     }
 
   }
 
-  // hideError() {
-  //   this.setState({showError: !this.state.showError});
-  // }
+  hideError() {
+    this.setState({showError: !this.state.showError});
+  }
+
   getTranslation = () => {
     axios.get(`http://localhost:3001/google?query=${this.state.word}`)
     .then(({data}) => {
@@ -78,7 +79,7 @@ class CreateCard extends Component {
 
 
   render() {
-    const errorMessage = this.state.showError ? 'Please fill in the word and description!' : '';
+    const errorMessage = this.state.showError ? 'Please fill in the word and upload an image!' : '';
     console.log(this.props.user_id);
   return (
     <div className='create-card'>
@@ -125,9 +126,9 @@ class CreateCard extends Component {
                 <audio controls="controls"  src={this.state.audioFileOnCreate.mp3} autoPlay/>
             }
 
-            <input value={this.state.translatedWord} placeholder="Your word in Korean" hidden/>
 
-            <br />
+
+
 
             {/* <input
               id='description'
@@ -136,7 +137,7 @@ class CreateCard extends Component {
               onChange = {(e) => this.setState({description: e.target.value})}
             /> */}
 
-            <h1>Picture Upload</h1>
+            <h2>Picture Upload</h2>
               <input
               id='description'
               type="file"
@@ -154,7 +155,7 @@ class CreateCard extends Component {
               id='create-card__button'
               onClick={() => {
 
-                if (this.state.word.length === 0) {
+                if (this.state.word.length === 0 || this.state.image === null) {
                   this.setState({
                     showError: !this.state.showError
                   });
@@ -190,7 +191,7 @@ class CreateCard extends Component {
               <div className='create-card__error'>
                 {errorMessage}
               </div>
-
+              <input value={this.state.translatedWord} placeholder="Your word in Korean" hidden/>
 
             </div>
           </div>

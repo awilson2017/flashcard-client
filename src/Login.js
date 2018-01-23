@@ -31,8 +31,8 @@ handleSubmit(e) {
 render() {
     return (
       <form name="login" className="form" onSubmit={this.handleSubmit}>
-        <label >Login</label>
-        <input type="text"/>
+        {/* <label >Login</label> */}
+        <input type="text" placeholder="Login"/>
         <input type="submit"/>
       </form>
     );

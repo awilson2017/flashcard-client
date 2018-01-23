@@ -41,11 +41,12 @@ class Card extends React.Component {
   }
 
   render() {
+    console.log(this.state.audio);
     const content = this.state.showAnswer
     ? (this.state.audio !== null &&
-      <div>
-        <audio controls="controls" src={this.state.audio} autoPlay/>
-        <img src={this.props.backContent}/>
+      <div className="backContent">
+        <audio className="card__audio" controls="controls" src={this.state.audio} autoPlay/>
+        <img className="card__image" src={this.props.backContent}/>
       </div>)
       : this.props.frontContent
     // const content = this.state.showAnswer ? ( this.props.backContent) : this.props.frontContent;

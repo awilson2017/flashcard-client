@@ -48,7 +48,6 @@ class CardContainer extends React.Component {
 
   setCard(card) {
     console.log(this.state.cards.length + 1);
-    debugger
     axios.get(`http://localhost:3001/users/${this.props.user_id}/flashcards/${(this.state.cards.length + 1)}`)
       .then(({data}) => {
         console.log(data);

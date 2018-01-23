@@ -9,14 +9,24 @@ class Header extends Component {
     }
   }
 
+  onLogoutCompleteHeader(user_id) {
+
+    this.props.onLogoutComplete(user_id)
+    console.log(user_id);
+    // this.setState({
+    //   user_id: null,
+    // })
+  }
+
   render() {
+    console.log(this.props.user_id);
     return (
       <div className='header'>
         <div className='header-content header-content__left'>
-          {/* <Logout
-             user_id={this.props.user_id}
-          onLogoutComplete={this.props.onLogoutComplete.bind(this)}
-        /> */}
+          <Logout
+             user_id={this.props.user_id.user_id}
+          onLogoutComplete={this.onLogoutCompleteHeader.bind(this)}
+        />
         </div>
 
         <div className='header-content header-content__middle'>

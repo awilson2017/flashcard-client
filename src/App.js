@@ -95,10 +95,10 @@ class Main extends Component {
     if (this.state.user_id) {
       return (
         <div className='wrapper'>
-          <Logout onLogoutComplete={this.onLogoutComplete.bind(this)}/>
+          {/* <Logout onLogoutComplete={this.onLogoutComplete.bind(this)}/> */}
           <Header
-          //    user_id={this.state.user_id}
-          // onLoginComplete={this.onLoginComplete.bind(this)}
+             user_id={this.state.user_id}
+             onLogoutComplete={this.onLogoutComplete.bind(this)}
           />
           <div className='content-wrapper'>
             <CardContainer

@@ -18,14 +18,18 @@ class Logout extends React.Component {
       },
     })
     .then(result => {
-      console.log(result.json());
+      console.log(result);
+      console.log(result.session);
+      console.log(this);
       console.log(this.props);
       this.props.onLogoutComplete(result.session)
     })
   }
+
   render(){
+    console.log(this.props.user_id);
     return (
-      <button onClick={this.handleClick}>Logout</button>
+      <button className="logout__button" onClick={this.handleClick}>Logout</button>
     );
   }
 }

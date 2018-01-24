@@ -1,13 +1,12 @@
 import React from 'react';
 import axios from 'axios';
-import ReactDOM from 'react-dom';
-// import _ from 'lodash';
+
 // Custom Components
 import Card from './Card';
 import CreateCard from './CreateCard';
-
+import SignUp from './SignUp';
 var _ = require('lodash');
-var FontAwesome = require('react-fontawesome');
+// var FontAwesome = require('react-fontawesome');
 
 class CardContainer extends React.Component {
   constructor(props) {
@@ -15,13 +14,14 @@ class CardContainer extends React.Component {
     this.state = {
       cards: props.userCards,
       cardNumber: 0,
+      audio: null,
     };
     this.boundCallback = this.hideCreateCard.bind(this);
     this.boundCreateCard = this.setCard.bind(this);
     this.boundShowPrevCard = this.showPrevCard.bind(this);
     this.boundShowNextCard = this.showNextCard.bind(this);
   }
-  debugger
+
 
   hideCreateCard() {
     this.setState({showModal: false});
@@ -30,6 +30,7 @@ class CardContainer extends React.Component {
   showNextCard() {
     if ((this.state.cardNumber + 1) !== this.props.userCards.size) {
       this.setState({cardNumber: this.state.cardNumber += 1});
+      this.getAudio();
       // this.nullAudioState()
     }
   }
@@ -37,16 +38,32 @@ class CardContainer extends React.Component {
   showPrevCard() {
     if (this.state.cardNumber !== 0) {
       this.setState({cardNumber: this.state.cardNumber -= 1});
+      this.getAudio();
       // this.nullAudioState();
     }
   }
 
-  nullAudioState() {
-    this.setState({
-      audio: null,
-    })
+  getAudio = () => {
+     console.log("i am in getAudio");
+     console.log(this.props.frontContent);
+     console.log('state.audio');
+     console.log(this.state.audio);
+     axios.get(`http://localhost:3001/forvo?translated=${this.props.frontContent}`)
 
-  }
+       .then(({data}) => {
+         console.log(data);
+
+         console.log(data);
+         this.setState({
+           audio: data.mp3
+         })
+         console.log(this.state.audio);
+
+       })
+   }
+
+
+
 
   setCard(card) {
     console.log(card);
@@ -55,14 +72,14 @@ class CardContainer extends React.Component {
         // console.log(data);
         // console.log(data.image_url);
         var cardObject = {
-          question: card.question,
+          question: data.question,
           image: data.image_url,
         }
         // console.log('cardObject');
         // console.log(cardObject);
         const newCards = this.state.cards.concat(cardObject);
         // console.log(newCards);
-        // this.setState({cards: newCards});
+        this.setState({cards: newCards});
       })
   }
 
@@ -88,25 +105,48 @@ class CardContainer extends React.Component {
   generateCards() {
      const cards = this.state.cards;
      console.log(this.state.cards);
+     console.log(this.state.audio);
 
      const cardsList = cards.map((card) => {
        console.log('card');
        console.log(cards);
-console.log('card.image_url');
-console.log(card.image_url);
+       console.log('card.image');
+       console.log(card.image);
         return (
           <Card
             frontContent={card.question}
             backContent={card.image}
+            audio={this.state.audio}
             showNextCard={this.boundShowNextCard}
             showPrevCard = {this.boundShowPrevCard}
             cardNumber={this.state.cardNumber}
+
           />
           );
       })
      return(cardsList[this.state.cardNumber]);
   }
   render() {
+    console.log('i am in card container');
+    console.log('props.userCards');
+    console.log(this.props.userCards);
+    console.log(this.props.userCards !== []);
+    //  this.props.userCards !== [] ?
+    //   <div>
+    //     {this.generateCards()}
+    //
+    //     <div className='card-container__dots-wrapper'>
+    //       {this.generateDots()}
+    //
+    //     </div>
+    //   </div>
+    // :
+    //   <div>
+    //     <SignUp/>
+    //     {'Please add your first card'}
+    //   </div>
+
+
     return (
       <div>
         <span
@@ -117,8 +157,6 @@ console.log(card.image_url);
             }}
           >
             ＋
-            {/* f067 */}
-            {/* add card */}
           </span>
 
         {this.state.showModal
@@ -128,19 +166,21 @@ console.log(card.image_url);
               user_id={this.props.user_id}
             />
           : ''}
+{console.log(this.state.cards)}
+          {this.state.cards !== [] ?
+            <div>
+              {this.generateCards()}
 
-          {(this.state.cards !== [])
-          ?
-          <div>
-            {this.generateCards()}
-
-            <div className='card-container__dots-wrapper'>
-              {this.generateDots()}
+              <div className='card-container__dots-wrapper'>
+                {this.generateDots()}
+              </div>
             </div>
-          </div>
           :
             "Please add your first card"
+
+
           }
+          {/* {noCards} */}
 
 
         {/* <div className='card-container__dots-wrapper'>

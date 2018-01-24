@@ -104,6 +104,10 @@ input::placeholder {
   font-size: 14px;
 }
 
+.backContent {
+  text-align: center;
+}
+
 audio.card__audio, img.card__image {
   position: relative;
 }

@@ -14,13 +14,15 @@ class CardContainer extends React.Component {
     super(props);
     this.state = {
       cards: props.userCards,
-      cardNumber: 0
+      cardNumber: 0,
     };
     this.boundCallback = this.hideCreateCard.bind(this);
     this.boundCreateCard = this.setCard.bind(this);
     this.boundShowPrevCard = this.showPrevCard.bind(this);
     this.boundShowNextCard = this.showNextCard.bind(this);
   }
+  debugger
+
   hideCreateCard() {
     this.setState({showModal: false});
   }
@@ -47,16 +49,20 @@ class CardContainer extends React.Component {
   }
 
   setCard(card) {
-    console.log(this.state.cards.length + 1);
-    axios.get(`http://localhost:3001/users/${this.props.user_id}/flashcards/${(this.state.cards.length + 1)}`)
+    console.log(card);
+    axios.get(`http://localhost:3001/users/${this.props.user_id}/flashcards/${(card.id)}`)
       .then(({data}) => {
-        console.log(data);
+        // console.log(data);
+        // console.log(data.image_url);
         var cardObject = {
           question: card.question,
-          image: card.image_url,
+          image: data.image_url,
         }
+        // console.log('cardObject');
+        // console.log(cardObject);
         const newCards = this.state.cards.concat(cardObject);
-        this.setState({cards: newCards});
+        // console.log(newCards);
+        // this.setState({cards: newCards});
       })
   }
 
@@ -86,6 +92,8 @@ class CardContainer extends React.Component {
      const cardsList = cards.map((card) => {
        console.log('card');
        console.log(cards);
+console.log('card.image_url');
+console.log(card.image_url);
         return (
           <Card
             frontContent={card.question}
@@ -121,7 +129,7 @@ class CardContainer extends React.Component {
             />
           : ''}
 
-          {(this.state.cards !== null)
+          {(this.state.cards !== [])
           ?
           <div>
             {this.generateCards()}

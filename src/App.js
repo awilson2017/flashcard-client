@@ -47,7 +47,7 @@ class Main extends Component {
     super(props);
     this.state={
       user_id: null,
-      cards: null,
+      cards: [],
       login: '',
     }
     console.log(this.state.user_id);
@@ -57,6 +57,8 @@ class Main extends Component {
     this.setState({
       user_id: user_id,
     })
+    console.log('main user id');
+    console.log(this.state.user_id);
   }
 
   onLoginComplete(user_id) {

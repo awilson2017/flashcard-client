@@ -195,7 +195,7 @@ audio.card__audio, img.card__image {
 
 .create-card__body {
   position: absolute;
-  height: 20em;
+  height: 30em;
   width: 30em;
   z-index: 1000;
   background: rgba(255, 255, 255, 0.95);

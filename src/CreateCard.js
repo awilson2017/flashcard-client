@@ -12,7 +12,7 @@ class CreateCard extends Component {
       translatedWord: '',
       audioFileOnCreate: null,
       image: null,
-      showError: false
+      showError: false,
     }
   }
 
@@ -130,8 +130,9 @@ class CreateCard extends Component {
             <button
               id='create-card__button'
               onClick={() => {
+                if (this.state.word.length === 0) {
 
-                if (this.state.word.length === 0 || this.state.image === null) {
+                // if (this.state.word.length === 0 || this.state.image === null) {
                   this.setState({
                     showError: !this.state.showError
                   });
@@ -153,12 +154,12 @@ class CreateCard extends Component {
                     }
                   })
                     .then(({data}) => {
-                      console.log(data);
-                      this.props.onCreateCard(word);
-                    })
-                }
+                       this.props.onCreateCard(data)
+                     })
+                   }
               }}
               >
+
                 Create!
               </button>
               <div className='create-card__error'>

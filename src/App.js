@@ -24,6 +24,7 @@ class Main extends Component {
     }
     console.log(this.state.user_id);
     console.log(this.state.cards);
+    this.onLogoutComplete = this.onLogoutComplete.bind(this);
   }
   onSignUpComplete(user_id) {
     this.setState({
@@ -58,11 +59,11 @@ class Main extends Component {
       })
   }
 
-  onLogoutComplete(user_id) {
-    this.setState({
-      user_id: null,
-    })
-  }
+  // onLogoutComplete(user_id) {
+  //   this.setState({
+  //     user_id: null,
+  //   })
+  // }
 
 
   render() {
@@ -70,15 +71,16 @@ class Main extends Component {
       return (
         <div className='wrapper'>
           {/* <Logout onLogoutComplete={this.onLogoutComplete.bind(this)}/> */}
-          <Header
+          {/* <Header
              user_id={this.state.user_id}
              onLogoutComplete={this.onLogoutComplete.bind(this)}
-          />
+          /> */}
           <div className='content-wrapper'>
             <CardContainer
               user_id={this.state.user_id}
               userCards={this.state.cards}
               onLoginComplete={this.onLoginComplete.bind(this)}
+              onLogoutComplete={this.onLogoutComplete}
             />
           </div>
         </div>

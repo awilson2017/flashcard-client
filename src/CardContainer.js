@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 // Custom Components
 import Card from './Card';
 import CreateCard from './CreateCard';
+import Header from './Header';
 
 var _ = require('lodash');
 var FontAwesome = require('react-fontawesome');
@@ -45,7 +46,10 @@ class CardContainer extends React.Component {
     this.setState({
       audio: null,
     })
+  }
 
+  onLogoutComplete(user_id) {
+    this.props.onLogoutComplete(user_id)
   }
 
   setCard(card) {
@@ -120,6 +124,10 @@ console.log(card.image_url);
             {/* f067 */}
             {/* add card */}
           </span>
+          <Header
+             user_id={this.state.user_id}
+             onLogoutComplete={this.onLogoutComplete.bind(this)}
+          />
 
         {this.state.showModal
           ? <CreateCard

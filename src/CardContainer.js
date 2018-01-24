@@ -139,7 +139,7 @@ console.log(card.image_url);
             </div>
           </div>
           :
-            "Please add your first card"
+            'Please add your first card'
           }
 
 

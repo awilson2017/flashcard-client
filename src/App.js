@@ -96,11 +96,13 @@ class Main extends Component {
 
             <img
                src={process.env.PUBLIC_URL + '/Korea-image.png'} alt="" />
+
+             <h2 className="home-page-msg">
+               Study Korean utilizing Native Speaker audio files and your Own Images
+             </h2>
           </div>
 
-          <div>
-            Study Korean utilizing Native Speaker audio files and your Own Images
-          </div>
+
 
         </div>
       );

@@ -117,9 +117,15 @@ class Main extends Component {
           <Login onLoginComplete={this.onLoginComplete.bind(this)}
           user_id={this.state.user_id}/>
           <SignUp onSignUpComplete={this.onSignUpComplete.bind(this)} />
-          <h1>
-            Welcome to Korean Flashard App
-          </h1>
+          <div className='home-container'>
+            <h1>
+              Welcome to Korean Flashard App
+            </h1>
+
+            <img
+               src={process.env.PUBLIC_URL + '/Korea-image.png'} alt="" />
+          </div>
+
         </div>
       );
     }

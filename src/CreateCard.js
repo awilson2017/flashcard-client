@@ -103,15 +103,15 @@ class CreateCard extends Component {
 
             {
 
-              (this.state.audioFileOnCreate !== null) ?
+              (this.state.audioFileOnCreate !== null) &&
                 <audio controls="controls"  src={this.state.audioFileOnCreate.mp3} autoPlay/>
 
-              :
-                <div>No audio for this word</div>
+              // :
+              //   <div>No audio for this word</div>
               }
               {/* // this.state.audioFileOnCreate !== null &&
               //   <audio controls="controls"  src={this.state.audioFileOnCreate.mp3} autoPlay/> */}
-            }
+
 
             <h2>Picture Upload</h2>
               <input

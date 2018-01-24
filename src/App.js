@@ -13,34 +13,6 @@ import Header from './Header';
 import CardContainer from './CardContainer';
 import SignUp from './SignUp';
 
-// class Header extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       showModal: false
-//     }
-//   }
-//
-//   render() {
-//     return (
-//       <div className='header'>
-//         <div className='header-content header-content__left'>
-//           {/* <Logout
-//              user_id={this.props.user_id}
-//           onLogoutComplete={this.props.onLogoutComplete.bind(this)}
-//         /> */}
-//         </div>
-//
-//         <div className='header-content header-content__middle'>
-//           Flash Cards
-//         </div>
-//         <div className='header-content header-content__right'>
-//
-//         </div>
-//       </div>
-//     )
-//   }
-// }
 
 class Main extends Component {
   constructor(props){
@@ -124,6 +96,10 @@ class Main extends Component {
 
             <img
                src={process.env.PUBLIC_URL + '/Korea-image.png'} alt="" />
+          </div>
+
+          <div>
+            Study Korean utilizing Native Speaker audio files and your Own Images
           </div>
 
         </div>

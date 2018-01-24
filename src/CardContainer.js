@@ -61,8 +61,8 @@ class CardContainer extends React.Component {
         // console.log('cardObject');
         // console.log(cardObject);
         const newCards = this.state.cards.concat(cardObject);
-        // console.log(newCards);
-        // this.setState({cards: newCards});
+        console.log(newCards);
+        this.setState({cards: newCards});
       })
   }
 

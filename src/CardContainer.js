@@ -129,7 +129,7 @@ console.log(card.image_url);
             />
           : ''}
 
-          {(this.state.cards !== [])
+          {(this.state.cards.length > 0)
           ?
           <div>
             {this.generateCards()}
@@ -139,7 +139,7 @@ console.log(card.image_url);
             </div>
           </div>
           :
-            'Please add your first card'
+            'Please add your first card by clicking +'
           }
 
 

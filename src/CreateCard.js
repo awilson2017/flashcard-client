@@ -13,6 +13,7 @@ class CreateCard extends Component {
       audioFileOnCreate: null,
       image: null,
       showError: false,
+      forvoSuccess: true,
     }
   }
 
@@ -28,15 +29,27 @@ class CreateCard extends Component {
       }, () => {
         axios.get(`http://localhost:3001/forvo?translated=${this.state.translatedWord}`)
         .then(({data}) => {
-          console.log('data');
-          console.log(data);
-          this.setState({
-            audioFileOnCreate: data,
-          })
-          console.log(this.state.audioFileOnCreate);
+          if (data) {
+            this.setState({
+              audioFileOnCreate: data,
+            })
+          } else {
+            this.setState({
+              forvoSuccess: false,
+            })
+          }
 
-          console.log('translated');
-          console.log(this.state.translatedWord);
+
+
+          // console.log('data');
+          // console.log(data);
+          // this.setState({
+          //   audioFileOnCreate: data,
+          // })
+          // console.log(this.state.audioFileOnCreate);
+          //
+          // console.log('translated');
+          // console.log(this.state.translatedWord);
 
         })
       })
@@ -102,15 +115,13 @@ class CreateCard extends Component {
             <br />
 
             {
-
+              //this works
               (this.state.audioFileOnCreate !== null) &&
                 <audio controls="controls"  src={this.state.audioFileOnCreate.mp3} autoPlay/>
-
-              // :
-              //   <div>No audio for this word</div>
               }
-              {/* // this.state.audioFileOnCreate !== null &&
-              //   <audio controls="controls"  src={this.state.audioFileOnCreate.mp3} autoPlay/> */}
+{console.log(this.state.forvoSuccess)}
+               {/* {this.state.forvoSuccess?
+                 <audio controls="controls"  src={this.state.audioFileOnCreate.mp3} autoPlay/> : 'no audio'} */}
 
 
             <h2>Picture Upload</h2>
